@@ -71,11 +71,19 @@ class Chapter2Spec extends FunSpec with Matchers {
 
     describe("currying exercise") {
       it("weird concat implemented with a curried method should concat 2 Lists ") {
-        val partial: List[Int] => List[String] => List[String] = curry[List[Int], List[String], List[String]]((a: List[Int], b: List[String]) => (a ++ b).map(_.toString))
+        val partial = curry((a: List[Int], b: List[String]) => (a ++ b).map(_.toString))
 
         partial(List(1, 2, 3, 4))(List("a", "b", "c")) should be(List("1", "2", "3", "4", "a", "b", "c"))
       }
 
+    }
+
+    describe("compose exercise") {
+      it("(4*3) / 2 should be 6") {
+        val composition = compose[Int, Int, Int]((x: Int) => x * 3, (w: Int) => w / 2)
+
+        composition(4) should be(6)
+      }
     }
 
   }
