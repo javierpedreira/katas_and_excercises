@@ -1,6 +1,7 @@
 import org.scalatest.{FunSpec, Matchers}
 import Chapter3.MyList
-import Chapter3.MyList.{sum, product}
+import Chapter3.MyList.{product, sum, tail}
+import com.sun.javaws.exceptions.InvalidArgumentException
 
 class Chapter3Spec extends FunSpec with Matchers {
   describe("MyList sum") {
@@ -29,6 +30,16 @@ class Chapter3Spec extends FunSpec with Matchers {
 
     it("should return the product of the elements of the list") {
       product(MyList(4, 5, 10)) should be(200)
+    }
+  }
+
+  describe("MyList tail") {
+    it("tail(MyList(1,4,5,6)) should return 1") {
+      tail(MyList(1,4,5,6)) should be(MyList(4,5,6))
+    }
+
+    it("tail(MyList(200)) should return 200") {
+      tail(MyList(200)) should be(MyList())
     }
   }
 }
