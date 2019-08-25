@@ -1,7 +1,7 @@
 import org.scalatest.{FunSpec, Matchers}
 import Chapter3.MyList
-import Chapter3.MyList.{product, sum, tail}
-import com.sun.javaws.exceptions.InvalidArgumentException
+import Chapter3.MyList.{product, sum, tail, setHead}
+import Chapter3.EmptyMyListException
 
 class Chapter3Spec extends FunSpec with Matchers {
   describe("MyList sum") {
@@ -40,6 +40,20 @@ class Chapter3Spec extends FunSpec with Matchers {
 
     it("tail(MyList(200)) should return 200") {
       tail(MyList(200)) should be(MyList())
+    }
+
+    it("tail(MyList()) should throw an Exception") {
+      intercept[EmptyMyListException] {tail(MyList())}
+    }
+  }
+
+  describe("My list setHead") {
+    it("setHead('a' ,MyList('v', 'q', 'z')) should replace v by a") {
+      setHead("a", MyList("v", "q", "z")) should be(MyList("a", "q", "z"))
+    }
+
+    it("setHead('2', MyList()) should raise an Exception") {
+      intercept[EmptyMyListException] {setHead(2, MyList())}
     }
   }
 }

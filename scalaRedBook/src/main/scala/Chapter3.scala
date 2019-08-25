@@ -1,5 +1,3 @@
-import com.sun.javaws.exceptions.InvalidArgumentException
-
 object Chapter3 {
 
   // +A id as variance annotiation that signals that A is a covariant of List
@@ -24,11 +22,21 @@ object Chapter3 {
     def tail[A](ls: MyList[A]): MyList[A] =
       ls match {
         case Cons(_, xs) => xs
+        case Nil => throw new EmptyMyListException(s"tail of an empty list is not possible")
       }
+
+    // exercise 3.3: Replaces the head of the list with a new element
+    def setHead[A](elem: A, myList: MyList[A]): MyList[A] =
+    myList match {
+      case Nil => throw new EmptyMyListException(s"set head $elem of an empty list is not possible")
+      case Cons(_, xs) => Cons(elem, xs)
+    }
 
     def apply[A](as: A*): MyList[A] =
       if(as.isEmpty) Nil
       else Cons(as.head, apply(as.tail: _*))
   }
+
+  case class EmptyMyListException(msg: String) extends Exception
 
 }
