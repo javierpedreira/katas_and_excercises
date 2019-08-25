@@ -28,10 +28,10 @@ object Chapter3 {
 
     // exercise 3.3: Replaces the head of the list with a new element
     def setHead[A](elem: A, myList: MyList[A]): MyList[A] =
-    myList match {
-      case Nil => throw new EmptyMyListException(s"set head $elem of an empty list is not possible")
-      case Cons(_, xs) => Cons(elem, xs)
-    }
+      myList match {
+        case Nil => throw new EmptyMyListException(s"set head $elem of an empty list is not possible")
+        case Cons(_, xs) => Cons(elem, xs)
+      }
 
     // exercise 3.4: drops the N elements from the list using tail
     @tailrec
@@ -44,6 +44,8 @@ object Chapter3 {
           case Cons(_, xs) => drop(xs, n - 1)
         }
       }
+
+
 
     def apply[A](as: A*): MyList[A] =
       if(as.isEmpty) Nil
