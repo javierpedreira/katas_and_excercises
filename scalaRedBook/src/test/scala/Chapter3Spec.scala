@@ -1,6 +1,6 @@
 import org.scalatest.{FunSpec, Matchers}
 import Chapter3.MyList
-import Chapter3.MyList.{product, sum, tail, setHead, drop}
+import Chapter3.MyList.{product, sum, tail, setHead, drop, dropWhile}
 import Chapter3.{EmptyMyListException, InvalidArgumentException}
 
 class Chapter3Spec extends FunSpec with Matchers {
@@ -73,6 +73,24 @@ class Chapter3Spec extends FunSpec with Matchers {
 
       it("drop(MyList(),  3) should return MyList(") {
         drop(MyList(),  3) should be(MyList())
+      }
+    }
+
+    describe("dropWhile") {
+      it("dropWhile(MyList(), (x: Int) => true) should return MyList()") {
+        dropWhile(MyList(), (x: Int) => true) should be (MyList())
+      }
+
+      it("dropWhile(MyList(5, 4, 3, -100, -200, -3000), (x: Int) => x > 0) should return MyList(-100, -200, -3000)") {
+        dropWhile(MyList(5, 4, 3, -100, -200, -3000), (x: Int) => x > 0) should be (MyList(-100, -200, -3000))
+      }
+
+      it("dropWhile(MyList(3, 20, 10), (x: Int) => x > 0) should return MyList()") {
+        dropWhile(MyList(3, 20, 10), (x: Int) => x > 0) should be (MyList())
+      }
+
+      it("dropWhile(MyList(3, 20, 10), (x: Int) => x < 0) should return MyList(3, 20, 10)") {
+        dropWhile(MyList(3, 20, 10), (x: Int) => x < 0) should be (MyList(3, 20, 10))
       }
     }
   }

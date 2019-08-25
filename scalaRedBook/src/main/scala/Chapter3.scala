@@ -45,7 +45,15 @@ object Chapter3 {
         }
       }
 
-
+    @tailrec
+    def dropWhile[A](list: MyList[A], f: A => Boolean): MyList[A] =
+      list match {
+        case Nil => MyList()
+        case Cons(t, xs) => {
+          if (f(t)) dropWhile(xs, f)
+          else list
+        }
+      }
 
     def apply[A](as: A*): MyList[A] =
       if(as.isEmpty) Nil
