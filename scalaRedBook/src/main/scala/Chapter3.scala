@@ -1,3 +1,4 @@
+import scala.annotation.tailrec
 object Chapter3 {
 
   // +A id as variance annotiation that signals that A is a covariant of List
@@ -32,11 +33,24 @@ object Chapter3 {
       case Cons(_, xs) => Cons(elem, xs)
     }
 
+    // exercise 3.4: drops the N elements from the list using tail
+    @tailrec
+    def drop[A](list: MyList[A], n: Int): MyList[A] =
+      if (n < 0) throw new InvalidArgumentException(s"can't drop $n elements from $list")
+      else if (n == 0) list
+      else {
+        list match {
+          case Nil => MyList()
+          case Cons(_, xs) => drop(xs, n - 1)
+        }
+      }
+
     def apply[A](as: A*): MyList[A] =
       if(as.isEmpty) Nil
       else Cons(as.head, apply(as.tail: _*))
   }
 
   case class EmptyMyListException(msg: String) extends Exception
+  case class InvalidArgumentException(msg: String) extends Exception
 
 }

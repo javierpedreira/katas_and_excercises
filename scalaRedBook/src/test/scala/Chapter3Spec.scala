@@ -1,7 +1,7 @@
 import org.scalatest.{FunSpec, Matchers}
 import Chapter3.MyList
-import Chapter3.MyList.{product, sum, tail, setHead}
-import Chapter3.EmptyMyListException
+import Chapter3.MyList.{product, sum, tail, setHead, drop}
+import Chapter3.{EmptyMyListException, InvalidArgumentException}
 
 class Chapter3Spec extends FunSpec with Matchers {
   describe("MyList") {
@@ -55,6 +55,24 @@ class Chapter3Spec extends FunSpec with Matchers {
 
       it("setHead('2', MyList()) should raise an Exception") {
         intercept[EmptyMyListException] {setHead(2, MyList())}
+      }
+    }
+
+    describe("drop") {
+      it("drop(MyList(1, 2, 3, 4, 5),  0) should return MyList(1, 2, 3, 4, 5)") {
+        drop(MyList(1, 2, 3, 4, 5),  0) should be(MyList(1, 2, 3, 4, 5))
+      }
+
+      it("drop(MyList(1, 2, 3, 4, 5),  -1) should raise an Exception") {
+        intercept[InvalidArgumentException] {drop(MyList(1, 2, 3, 4, 5),  -1)}
+      }
+
+      it("drop(MyList(1, 2, 3, 4, 5),  3) should return MyList(4, 5)") {
+        drop(MyList(1, 2, 3, 4, 5),  3) should be(MyList(4, 5))
+      }
+
+      it("drop(MyList(),  3) should return MyList(") {
+        drop(MyList(),  3) should be(MyList())
       }
     }
   }
