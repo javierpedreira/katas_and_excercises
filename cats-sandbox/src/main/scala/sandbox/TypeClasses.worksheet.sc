@@ -54,7 +54,6 @@ object Bakery {
   def bake[A](value: A)(implicit w: Bakery[A]): A = w.toOven(value)
 }
 
-
 // The way to use this is to import the object and use the method directly
 // Make sure there is a Type Instance defined for the Type defined
 import CakeInstances.bakeMeatCake
@@ -90,7 +89,6 @@ CheeseCake("cake2").bake
 // an instance and there are no ambiguous errors
 val x: Bakery[MeatCake] = implicitly[Bakery[MeatCake]]
 
-
 // Packaging Implicits
 // We can create the Type Classes and pack the Instances in a
 // Companion Object this is useful within the implicit scope
@@ -106,6 +104,3 @@ object Store {
       def sell(v: Computer): Computer = ???
     }
 }
-
-
-
