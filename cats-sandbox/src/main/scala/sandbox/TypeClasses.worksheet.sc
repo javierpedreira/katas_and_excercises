@@ -82,3 +82,30 @@ import BakerySyntax.BakeryOps
 MeatCake("cake1").bake
 CheeseCake("cake2").bake
 
+// Implicitly
+
+// Summoning instances can be done by using the implicitly method
+// from the scala default library
+// This is useful for debugging purposes to check if the compilir is finding
+// an instance and there are no ambiguous errors
+val x: Bakery[MeatCake] = implicitly[Bakery[MeatCake]]
+
+
+// Packaging Implicits
+// We can create the Type Classes and pack the Instances in a
+// Companion Object this is useful within the implicit scope
+case class Computer(name: String)
+
+trait Store[A] {
+  def sell(v: A): A
+}
+
+object Store {
+  implicit val sellElectronics: Store[Computer] =
+    new Store[Computer] {
+      def sell(v: Computer): Computer = ???
+    }
+}
+
+
+
