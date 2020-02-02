@@ -92,6 +92,11 @@ val x: Bakery[MeatCake] = implicitly[Bakery[MeatCake]]
 // Packaging Implicits
 // We can create the Type Classes and pack the Instances in a
 // Companion Object this is useful within the implicit scope
+// The compiler looks for implicit definitions at the call site
+// - local or inherit definitions
+// - imported definitions
+// - in the companion object of the type class or parameter type
+
 case class Computer(name: String)
 
 trait Store[A] {
@@ -104,3 +109,21 @@ object Store {
       def sell(v: Computer): Computer = ???
     }
 }
+
+// Recursive Implicit Resolution
+// When we need to abstract a seconc layer, for example if the type parameter is
+// another monad of a certain type, like Option
+
+implicit def optionBake[A](implicit baker: Bakery[A]): Bakery[Option[A]] =
+  new Bakery[Option[A]] {
+    def sell(option: Option[A]): Option[A] = ???
+    def toFryPan(value: Option[A]): Option[A] = ???
+    def toOven(option: Option[A]): Option[A] =
+      option match {
+        case Some(someCake) => Some(baker.toOven(someCake))
+        case None           => ???
+      }
+  }
+
+bake(Option(new CheeseCake("Fff")))(optionBake[CheeseCake])
+

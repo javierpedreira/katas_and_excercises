@@ -11,8 +11,7 @@ scalacOptions ++= Seq(
   "-feature", // warn about misused language features
   "-language:higherKinds", // allow higher kinded types without `import scala.language.higherKinds`
   "-Xlint", // enable handy linter warnings
-  "-Xfatal-warnings", // turn compiler warnings into errors
-  "-Ypartial-unification" // allow the compiler to unify type constructors of different arities
+  "-Xfatal-warnings" // turn compiler warnings into errors
 )
 
 libraryDependencies += "org.typelevel" %% "cats-core" % "2.0.0"
