@@ -1,11 +1,13 @@
 package sandbox.typeclasses
 
-import Printable.print
-
 object Main extends App {
 
-  val c = Cat("MISSIFUAS", 1, "black")
+  println("Type Classes Exercice 1.3: Printable library")
+  Exercise1.run1_3_1()
 
-  print(c)
+  println("Type Classes Exercice 1.3: Better Syntax")
+  Exercise1.run1_3_2()
 
+  println("Type Classes Exercice 1.4: Cat Show")
+  Exercise1.run1_4()
 }
