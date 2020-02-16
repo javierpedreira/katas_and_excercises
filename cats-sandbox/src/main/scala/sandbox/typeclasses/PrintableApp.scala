@@ -10,4 +10,7 @@ object Main extends App {
 
   println("Type Classes Exercice 1.4: Cat Show")
   Exercise1.run1_4()
+
+  println("Custom types Exercise 1.5.5: Equality, Liberty and Felinity")
+  Exercise1.run_1_5_5()
 }

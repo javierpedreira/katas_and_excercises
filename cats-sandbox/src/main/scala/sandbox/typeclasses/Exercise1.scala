@@ -23,4 +23,22 @@ object Exercise1 {
     println(CatShow("MrChopper", 3, "yellow").show)
 
   }
+
+  def run_1_5_5(): Unit = {
+    import cats.syntax.eq._
+    import cats.instances.option._
+    import Cat.equalCats
+
+    val cat1 = Cat("Garfield", 38, "orange and black")
+    val cat2 = Cat("Heathcliff", 33, "orange and black")
+
+    println(s"cat1 vs cat1 ${cat1 === cat1}")
+    println(s"cat1 vs cat2 ${cat1 === cat2}")
+
+    val optionCat1 = Option(cat1)
+    val optionCat2 = Option.empty[Cat]
+
+    println(s"optioncat1 vs optioncat1 ${optionCat1 === optionCat1}")
+    println(s"optioncat1 vs optioncat2 ${optionCat1 === optionCat2}")
+  }
 }
